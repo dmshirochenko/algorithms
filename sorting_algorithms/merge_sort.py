@@ -28,7 +28,7 @@ def merging_lists(left, right):
     return merged_list
 
 def merge_sort(items_to_sort):
-    if len(items_to_sort) == 1:
+    if len(items_to_sort) <= 1:
         return items_to_sort
     index_to_split = len(items_to_sort) // 2
     left_side = items_to_sort[ :index_to_split]
