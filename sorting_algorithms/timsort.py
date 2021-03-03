@@ -15,8 +15,7 @@ def insertion_sort_asc(items_to_sort, left=0, right=None):
 
         # while will stop when we will find new place for current element
         while (position_to_check >= left and current_element < items_to_sort[position_to_check]):
-            items_to_sort[position_to_check +
-                          1] = items_to_sort[position_to_check]
+            items_to_sort[position_to_check + 1] = items_to_sort[position_to_check]
             position_to_check -= 1
 
         items_to_sort[position_to_check + 1] = current_element
@@ -48,7 +47,7 @@ def merging_lists(left, right):
 
 
 def timsort_asc(items_to_sort):
-    block_size = 128
+    block_size = 32 #blcok size
 
     for i in range(0, len(items_to_sort), block_size):
         insertion_sort_asc(items_to_sort, i, min((i + block_size - 1), len(items_to_sort) - 1)) #min function will check end of the list
@@ -123,5 +122,8 @@ if __name__ == "__main__":
     for i in [100, 1000, 10_000, 100_000, 1_000_000, 10_000_000]:
         items_to_sort = [random.randint(1, 999) for _ in range(i)]
         timer_start = time.perf_counter()
-        timsort_asc(items_to_sort)
-        print('Time to sort {0} elemets = {1}'.format(i, time.perf_counter() - timer_start))
+        timsort_asc(items_to_sort.copy())
+        print('Timsort. Time to sort {0} elemets = {1}'.format(i, time.perf_counter() - timer_start))
+        timer_start = time.perf_counter()
+        sorted(items_to_sort.copy())
+        print('Build in sort. Time to sort {0} elemets = {1}'.format(i, time.perf_counter() - timer_start))
